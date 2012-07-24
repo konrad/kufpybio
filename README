@@ -1,0 +1,18 @@
+== About ==
+
+This is a collection of Python classes and functions frequenctly used
+by me in bioinformatical data processing. 
+
+== Python version ==
+
+The code is developed using Python 3.2 or higher but might also run
+with Python 2.7.
+
+== Author ==
+
+Konrad Förstner <konrad@foerstner.org>
+http://konrad.foerstner.org/
+
+== License ==
+
+see LICENSE file
