@@ -1,7 +1,8 @@
 == About ==
 
 This is a collection of Python classes and functions frequently used
-by me in bioinformatical data processing.
+by me in bioinformatical data processing. It is currently in a rather
+early and unstable state so use it carefully.
 
 == Python version ==
 
