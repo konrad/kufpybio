@@ -30,5 +30,15 @@ class TestGene(unittest.TestCase):
         self.assertEqual(gene.start, 5)
         self.assertEqual(gene.end, 1000)
 
+    def test_len(self):
+        # 1234567890
+        # ==========
+        gene1 = Gene("chr1", "a", "b", "1", "10", "+")
+        self.assertEqual(gene1.len(), 10)
+        # 01234567890
+        # ===========
+        gene2 = Gene("chr1", "a", "b", "10", "20", "+")
+        self.assertEqual(gene2.len(), 11)
+
 if __name__ == "__main__":
     unittest.main()

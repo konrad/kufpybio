@@ -24,4 +24,4 @@ class Gene(object):
             self.extra = extra
 
     def len(self):
-        return(self.end - self.start)
+        return(self.end - self.start + 1)
