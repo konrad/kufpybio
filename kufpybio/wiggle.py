@@ -32,10 +32,11 @@ class WiggleParser(object):
                     chrom_name = self._chrom_name(row)
             else:
                 pos_value_pairs.append([int(row[0]), float(row[1])])
+        yield(WiggleEntry(track_name, chrom_name, span, pos_value_pairs))
 
     def _chrom_name(self, row):
         return(self._attrs_and_values(row)["chrom"])
-                
+
     def _track_name(self, row):
         return(self._attrs_and_values(row)["name"])
 
@@ -50,7 +51,7 @@ class WiggleParser(object):
         return(attrs_and_values)
 
 class WiggleEntry(object):
-    
+
     def __init__(self, track_name, chrom_name, span, pos_value_pairs):
         self.track_name = track_name
         self.chrom_name = chrom_name
