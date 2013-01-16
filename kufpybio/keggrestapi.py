@@ -28,13 +28,16 @@ class KEGGRESTAPI(object):
         """entity_id can be e.g. a gene id, a KO id or a reaction id"""
         data = self._get_data(
             "%s/%s_linked_pathways.kegg", "link/pathway/%s", entity_id)
-        return(self._second_column_to_list(data))
+        return(self._clean_list(self._second_column_to_list(data), "path:"))
 
     def linked_reactions(self, entity_id):
         """entity_id can be e.g. a gene id, a KO id or as pathway id"""
         data = self._get_data(
             "%s/%s_linked_reactions.kegg", "link/reaction/%s", entity_id)
-        return(self._second_column_to_list(data))
+        return(self._clean_list(self._second_column_to_list(data), "rn:"))
+
+    def _clean_list(self, id_list, prefix_to_remove):
+        return([item.replace(prefix_to_remove, "") for item in id_list])
 
     def _get_data(self, path_template, url_template, entity_id):
         file_path = self._file_path(path_template, entity_id)
