@@ -1,12 +1,13 @@
 == About ==
 
 This is a collection of Python classes and functions frequently used
-by me in bioinformatical data processing. It is currently in a rather
-early and unstable state so use it carefully.
+by me in bioinformatical data processing. It is currently in an early
+and unstable state so use it carefully. In most cases only selected
+features (the ones I needed for my purposes) are accessible.
 
 == Python version ==
 
-The code is developed using Python 3.2 or higher but might also run
+The code is developed using Python 3.3 or higher but might also run
 with Python 2.7.
 
 == Author ==
