@@ -43,7 +43,6 @@ class KEGGRESTAPI(object):
         return(open(file_path).read())
 
     def _retrive_data(self, url_template, entity_id, file_path):
-        print(self._base_url + url_template % (entity_id))
         data = urllib.request.urlopen(
             self._base_url + url_template % (entity_id)).read()
         data_fh = open(file_path, "wb")
