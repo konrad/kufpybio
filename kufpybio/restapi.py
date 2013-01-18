@@ -14,6 +14,10 @@ class RESTAPI(object):
             self._retrive_data(url_template, entity_id, file_path)
         return(open(file_path).read())
 
+    def _create_download_folder(self):
+        if not os.path.exists(self._download_folder):
+            os.makedirs(self._download_folder)
+
     def _retrive_data(self, url_template, entity_id, file_path):
         data = urllib.request.urlopen(
             self._base_url + url_template % (entity_id)).read()

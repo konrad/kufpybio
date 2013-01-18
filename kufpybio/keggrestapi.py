@@ -10,8 +10,7 @@ class KEGGRESTAPI(restapi.RESTAPI):
     def __init__(self, download_folder="kegg_files"):
         self._download_folder = download_folder
         self._base_url = "http://rest.kegg.jp/"
-        if not os.path.exists(self._download_folder):
-            os.makedirs(self._download_folder)
+        self._create_download_folder()        
 
     def reference_pathway(self, map_number):
         """e.g. 00630"""
