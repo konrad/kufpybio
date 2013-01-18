@@ -14,15 +14,11 @@ class KEGGRESTAPI(restapi.RESTAPI):
 
     def reference_pathway(self, map_number):
         """e.g. 00630"""
-        data = self._get_data(
-            "%s/map%s.kegg", "get/pathway:map%s", map_number)
-        return(data)
+        return(self._get_data("%s/map%s.kegg", "get/pathway:map%s", map_number))
 
     def pathway(self, map_number):
         """e.g. sax00270"""
-        data = self._get_data(
-            "%s/%s.kegg", "get/pathway:%s", map_number)
-        return(data)
+        return(self._get_data("%s/%s.kegg", "get/pathway:%s", map_number))
 
     def ortholog_of_gene(self, gene_id):
         """e.g. hsa:5236"""
