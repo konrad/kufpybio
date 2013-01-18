@@ -10,7 +10,7 @@ class KEGGRESTAPI(restapi.RESTAPI):
     def __init__(self, download_folder="kegg_files"):
         self._download_folder = download_folder
         self._base_url = "http://rest.kegg.jp/"
-        self._create_download_folder()        
+        self._create_download_folder()
 
     def reference_pathway(self, map_number):
         """e.g. 00630"""
@@ -23,6 +23,12 @@ class KEGGRESTAPI(restapi.RESTAPI):
         data = self._get_data(
             "%s/%s.kegg", "get/pathway:%s", map_number)
         return(data)
+
+    def ortholog_of_gene(self, gene_id):
+        """e.g. hsa:5236"""
+        data = self._get_data(
+            "%s/%s_ortholog.kegg", "link/orthology/%s", gene_id)
+        return(self._clean_list(self._second_column_to_list(data), "ko:"))
 
     def linked_pathways(self, entity_id):
         """entity_id can be e.g. a gene id, a KO id or a reaction id"""
