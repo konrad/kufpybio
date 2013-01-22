@@ -9,10 +9,15 @@ class RESTAPI(object):
     """
 
     def _get_data(self, path_template, url_template, entity_id):
+        file_path = self._get_file_path(
+            path_template, url_template, entity_id)
+        return(open(file_path).read())
+
+    def _get_file_path(self, path_template, url_template, entity_id):
         file_path = self._file_path(path_template, entity_id)
         if not os.path.exists(file_path):
             self._retrive_data(url_template, entity_id, file_path)
-        return(open(file_path).read())
+        return(file_path)
 
     def _create_download_folder(self):
         if not os.path.exists(self._download_folder):
