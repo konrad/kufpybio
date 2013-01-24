@@ -20,6 +20,11 @@ class KEGGRESTAPI(restapi.RESTAPI):
         """e.g. sax00270"""
         return(self._get_data("%s/%s.kegg", "get/pathway:%s", map_number))
 
+    def reaction(self, reaction_id):
+        """e.g. R06363"""
+        return(self._get_data("%s/%s_reaction.kegg",
+                              "get/reaction:%s", reaction_id))
+
     def ortholog_of_gene(self, gene_id):
         """e.g. hsa:5236"""
         data = self._get_data(
