@@ -37,6 +37,14 @@ class SubSeqExtractor(object):
             upstream, downstream = downstream, upstream
         start = pos - upstream - 1
         end = pos + downstream
+        if not self._include_pos and downstream != 0 and upstream != 0:
+            pass
+        elif not self._include_pos and downstream == 0 and upstream == 0:
+            start += 1
+        elif not self._include_pos and upstream != 0:
+            end -= 1
+        elif not self._include_pos and downstream != 0:
+            start += 1
         if self._coordinate_start == 0:
             start += 1
             end += 1
