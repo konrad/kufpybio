@@ -34,10 +34,10 @@ class WiggleToGrConverter(object):
     def _output_file(self, input_file, output_prefix, entry):
         if output_prefix:
             return("%s_%s_in_%s.gr" % (
-                    output_prefix, entry.track_name, entry.chrom_name))
+                    output_prefix, entry.track_name, entry.replicon))
         else:
             return("%s_%s_in_%s.gr" % (
-                    input_file, entry.track_name, entry.chrom_name))
+                    input_file, entry.track_name, entry.replicon))
 
 if __name__ == "__main__": 
    main()
