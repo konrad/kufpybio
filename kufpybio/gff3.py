@@ -29,6 +29,22 @@ class Gff3Parser(object):
 
 class Gff3Entry(object):
 
+    """
+
+    Example:
+    start, end = sorted([int(pos) for pos in [start, end]])
+    Gff3Entry({
+            "seq_id" : seq_id,
+            "source" : "MyLab",
+            "feature" : "sRNA",
+            "start" : start,
+            "end" : end,
+            "strand" : strand,
+            "score" : ".",
+            "phase" : ".",
+            "attributes" : "name=%s;locus_tag=%s" % (name, locus_tag)})
+    """
+
     def __init__(self, entry_dict):
         self.seq_id = entry_dict["seq_id"]
         self.source = entry_dict["source"]
