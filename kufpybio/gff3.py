@@ -59,15 +59,15 @@ class Gff3Entry(object):
         self.phase = entry_dict["phase"]
         self.attributes = self._attributes(entry_dict["attributes"])
         self.attribute_string = entry_dict["attributes"]
-    
+
     def _attributes(self, attributes_string):
         """Translate the attribute string to dictionary"""
         return(dict(
-                [key_value_pair.split("=") 
+                [key_value_pair.split("=")
                  for key_value_pair in attributes_string.split(";")]))
 
     def __str__(self):
         return("\t".join([str(field) for field in [
                         self.seq_id, self.source, self.feature, self.start,
-                        self.end, self.score, self.strand, self.phase, 
+                        self.end, self.score, self.strand, self.phase,
                         self.attribute_string]]))
