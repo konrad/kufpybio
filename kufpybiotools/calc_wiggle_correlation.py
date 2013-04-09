@@ -51,12 +51,12 @@ class WiggleCorrelator(object):
         for entry_1, entry_2 in zip(
                 self._wiggle_parser.entries(wiggle_file_1),
                 self._wiggle_parser.entries(wiggle_file_2)):
-                assert(entry_1.chrom_name == entry_2.chrom_name)
+                assert(entry_1.replicon == entry_2.replicon)
                 pos_value_pairs_1 = dict(entry_1.pos_value_pairs)
                 pos_value_pairs_2 = dict(entry_2.pos_value_pairs)
                 if len(pos_value_pairs_1) == 0 or len(pos_value_pairs_2) == 0:
                     print("%s: At least one replicon has no coverage for "
-                          "this libs." % (entry_2.chrom_name))
+                          "this libs." % (entry_2.replicon))
                     continue
                 non_redu_pos = set(
                     pos_value_pairs_1.keys() + pos_value_pairs_2.keys())
@@ -65,7 +65,7 @@ class WiggleCorrelator(object):
                 values_2 = np.array(
                     [pos_value_pairs_2.get(pos, 0.0) for pos in non_redu_pos])
                 pearson, pvalue = stats.pearsonr(values_1, values_2)
-                print("%s: %s (%s)" % (entry_1.chrom_name, pearson, pvalue))
+                print("%s: %s (%s)" % (entry_1.replicon, pearson, pvalue))
 
 if __name__ == "__main__":
    main()
