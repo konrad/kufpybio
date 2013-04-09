@@ -17,13 +17,13 @@ class Gff3Parser(object):
         """
         """
         for entry_dict in csv.DictReader(
-            input_gff_fh, delimiter="\t", 
-            fieldnames=["seq_id", "source", "feature", "start", 
+            input_gff_fh, delimiter="\t",
+            fieldnames=["seq_id", "source", "feature", "start",
                         "end", "score", "strand", "phase", "attributes"]):
             if entry_dict["seq_id"].startswith("#"):
                 continue
             yield(self._dict_to_entry(entry_dict))
-    
+
     def _dict_to_entry(self, entry_dict):
         return(Gff3Entry(entry_dict))
 
