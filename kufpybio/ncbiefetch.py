@@ -38,11 +38,16 @@ class NCBIEfetch(object):
         tree.parse(self._file_path(gene_id))
         gene_dict["uniprot_id"] = None
         gene_dict["kegg_id"] = None
+        gene_dict["go_ids"] = []
         for db_tag in tree.findall(".//Dbtag"):
             dbtag_db = db_tag.find(".//Dbtag_db")
             object_id_str = db_tag.find(".//Object-id_str")
+            object_id_id = db_tag.find(".//Object-id_id")
             if dbtag_db.text == "UniProtKB/TrEMBL" and object_id_str != None:
                 gene_dict["uniprot_id"] = object_id_str.text
             elif dbtag_db.text == "KEGG" and object_id_str != None:
                 gene_dict["kegg_id"] = object_id_str.text
+            elif dbtag_db.text == "GO" and object_id_id != None:
+                gene_dict["go_ids"].append(object_id_id.text)
+
         return(gene_dict)
