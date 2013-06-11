@@ -66,6 +66,11 @@ class Gff3Entry(object):
                 [key_value_pair.split("=")
                  for key_value_pair in attributes_string.split(";")]))
 
+    def add_attribute(self, key, value):
+        self.attributes[key] = value
+        self.attribute_string = ";".join(
+            ["=".join(items) for items in self.attributes.items()])
+
     def __str__(self):
         return("\t".join([str(field) for field in [
                         self.seq_id, self.source, self.feature, self.start,
