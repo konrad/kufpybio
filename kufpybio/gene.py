@@ -31,7 +31,7 @@ class Gene(object):
             self.extra = extra
 
     def len(self):
-        return(self.end - self.start + 1)
+        return self.end - self.start + 1
     
     def __repr__(self):
         return("Gene Id: %s\n" 

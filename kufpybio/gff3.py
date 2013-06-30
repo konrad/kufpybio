@@ -22,10 +22,10 @@ class Gff3Parser(object):
                         "end", "score", "strand", "phase", "attributes"]):
             if entry_dict["seq_id"].startswith("#"):
                 continue
-            yield(self._dict_to_entry(entry_dict))
+            yield self._dict_to_entry(entry_dict)
 
     def _dict_to_entry(self, entry_dict):
-        return(Gff3Entry(entry_dict))
+        return Gff3Entry(entry_dict)
 
 class Gff3Entry(object):
 
@@ -62,9 +62,9 @@ class Gff3Entry(object):
 
     def _attributes(self, attributes_string):
         """Translate the attribute string to dictionary"""
-        return(dict(
-                [key_value_pair.split("=")
-                 for key_value_pair in attributes_string.split(";")]))
+        return dict(
+            [key_value_pair.split("=")
+             for key_value_pair in attributes_string.split(";")])
 
     def add_attribute(self, key, value):
         self.attributes[key] = value
@@ -72,7 +72,7 @@ class Gff3Entry(object):
             ["=".join(items) for items in self.attributes.items()])
 
     def __str__(self):
-        return("\t".join([str(field) for field in [
+        return "\t".join([str(field) for field in [
                         self.seq_id, self.source, self.feature, self.start,
                         self.end, self.score, self.strand, self.phase,
-                        self.attribute_string]]))
+                        self.attribute_string]])

@@ -92,7 +92,7 @@ class TSSGeneMapper(object):
                 self.tss_and_hit_genes[tss] = orphan_str
         self._set_type_of_5_prime_tss()
         self._remove_multiple_associations()
-        return(self.tss_and_hit_genes)
+        return self.tss_and_hit_genes
 
     def _set_type_of_5_prime_tss(self):
         for gene, distances_and_tss in self.genes_and_5_prime_tss.items():
@@ -139,7 +139,7 @@ class TSSGeneMapper(object):
         dist = self._5_prime_dist(tss, gene)
         if (tss.strand == gene.strand and 
             dist >= 0 and dist <= self._max_dist_5_prime):
-            return(True)
+            return True
 
     def _has_internal_association(self, tss, gene):
         """Test for internal location
@@ -152,10 +152,10 @@ class TSSGeneMapper(object):
             return
         if (gene.strand == plus_str and tss.pos > gene.start and 
             tss.pos <= gene.end):
-            return(True)
+            return True
         if (gene.strand == minus_str and tss.pos >= gene.start and 
             tss.pos < gene.end):
-            return(True)
+            return True
 
     def _has_antisense_association(self, tss, gene):
         """Test for antisense association
@@ -164,14 +164,14 @@ class TSSGeneMapper(object):
         if (tss.strand != gene.strand and 
             tss.pos >= gene.start - self._max_dist_antisense and 
             tss.pos <= gene.end + self._max_dist_antisense):
-            return(True)
+            return True
 
     def _5_prime_dist(self, tss, gene):
         """Calculate the TSS to gene start distance."""
         if gene.strand == plus_str:
-            return(gene.start - tss.pos)
+            return gene.start - tss.pos
         elif gene.strand == minus_str:
-            return(tss.pos - gene.end)
+            return tss.pos - gene.end
 
     def _remove_multiple_associations(self):
         """Remove multple 5' associations
@@ -215,27 +215,27 @@ class TSSGeneFormatter(object):
         """
         # Orphan
         if tss_features == orphan_str:
-            return(["0", "0", "0", "0"])
+            return ["0", "0", "0", "0"]
         # 5' ...
         elif (tss_features["location"] == loc_5_prime_str):
             # ... primary
             if  tss_features["tss_type"] == primary_str:
-                return(["1", "0", "0", "0"])
+                return ["1", "0", "0", "0"]
             # ... secondary
             elif tss_features["tss_type"] == secondary_str:
-                return(["0", "1", "0", "0"])
+                return ["0", "1", "0", "0"]
         # Internal
         elif (tss_features["location"] == loc_internal_str):
-            return(["0", "0", "1", "0"])
+            return ["0", "0", "1", "0"]
         # Antisense 
         elif (tss_features["location"] == loc_antisense_str):
-            return(["0", "0", "0", "1"])
+            return ["0", "0", "0", "1"]
 
     def tss_features_string(self, tss_features):
         if tss_features == orphan_str:
-            return(orphan_str)
+            return orphan_str
         elif tss_features["tss_type"]:
-            return("%s - %s" % (
-                    tss_features["location"], tss_features["tss_type"]))
+            return "%s - %s" % (
+                    tss_features["location"], tss_features["tss_type"])
         else:
-            return(tss_features["location"])
+            return tss_features["location"]

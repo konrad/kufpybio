@@ -6,7 +6,7 @@ class TSSPredatorReader(object):
         for row in csv.reader(input_fh, delimiter="\t"):
             if row[0].startswith("SuperPos"):
                 continue
-            yield(TSSPredatorEntry(row))
+            yield TSSPredatorEntry(row)
 
 class TSSPredatorEntry(object):
 
@@ -46,4 +46,4 @@ class TSSPredatorEntry(object):
             self.is_orphan = True
 
     def __str__(self):
-        return("%s %s %s" % (self.super_pos, self.super_strand, self.genome))
+        return "%s %s %s" % (self.super_pos, self.super_strand, self.genome)

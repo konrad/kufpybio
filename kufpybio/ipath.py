@@ -66,12 +66,12 @@ class IPathDownload(object):
 
     def _extract_svg_url(self, content):
         url_patter = re.compile('href="(.+)">here<')
-        return(re.search(url_patter, content.decode('utf-8')).groups(0)[0])
+        return re.search(url_patter, content.decode('utf-8')).groups(0)[0]
 
     def _sent_form(self):
         http = Http()
         data = urlencode(self._form_values)
-        return(http.request(self._url, "POST", data))
+        return http.request(self._url, "POST", data)
 
     def _download_svg_file(self, svg_url):
         svg_content = urllib.request.urlopen(svg_url).read()

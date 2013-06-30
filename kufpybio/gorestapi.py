@@ -14,4 +14,4 @@ class GORESTAPI(restapi.RESTAPI):
 
     def go_term_information_xml(self, go_id):
         """e.g. GO:0003824"""
-        return(self._get_data("%s/%s.xml", "id=%s&format=oboxml", go_id))
+        return self._get_data("%s/%s.xml", "id=%s&format=oboxml", go_id)

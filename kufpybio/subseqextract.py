@@ -51,5 +51,5 @@ class SubSeqExtractor(object):
         assert start >= 0
         assert end-1 < len(self._seq)
         if rev_strand:
-            return(str(self._seq[start:end].reverse_complement()))
-        return(str(self._seq[start:end]))
+            return str(self._seq[start:end].reverse_complement())
+        return str(self._seq[start:end])

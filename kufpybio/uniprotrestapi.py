@@ -23,8 +23,8 @@ class UniprotRESTAPI(RESTAPI):
 
     def uniprot_protein_xml(self, uniprot_id):
         """e.g. Q5FJ41"""
-        return(self._get_data("%s/%s.xml", "%s.xml", uniprot_id))
+        return self._get_data("%s/%s.xml", "%s.xml", uniprot_id)
 
     def uniprot_protein_xml_path(self, uniprot_id):
         """e.g. Q5FJ41"""
-        return(self._get_file_path("%s/%s.xml", "%s.xml", uniprot_id))
+        return self._get_file_path("%s/%s.xml", "%s.xml", uniprot_id)

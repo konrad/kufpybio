@@ -17,7 +17,7 @@ class NCBIEfetch(object):
         gene_file = self._file_path(gene_id)
         if not os.path.exists(gene_file):
             self._retrieve_gene_data(gene_id)
-        return(self._gene_file_to_dict(gene_id))
+        return self._gene_file_to_dict(gene_id)
 
     def _retrieve_gene_data(self, gene_id):
         data = urllib.request.urlopen(self._gene_xml_url(gene_id)).read()
@@ -26,11 +26,11 @@ class NCBIEfetch(object):
         gene_fh.close()
 
     def _file_path(self, gene_id):
-        return("%s/%s.xml" % (self._download_folder, gene_id))
+        return "%s/%s.xml" % (self._download_folder, gene_id)
 
     def _gene_xml_url(self, gene_id):
-                return("%sdb=gene&id=%s&rettype=xml&email=%s" % (
-                    self._base_url, gene_id, self._email_address))
+                return "%sdb=gene&id=%s&rettype=xml&email=%s" % (
+                    self._base_url, gene_id, self._email_address)
 
     def _gene_file_to_dict(self, gene_id):
         gene_dict = {}
@@ -50,4 +50,4 @@ class NCBIEfetch(object):
             elif dbtag_db.text == "GO" and object_id_id != None:
                 gene_dict["go_ids"].append(object_id_id.text)
 
-        return(gene_dict)
+        return gene_dict

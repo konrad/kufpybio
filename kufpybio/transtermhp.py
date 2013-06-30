@@ -4,7 +4,7 @@ class TranstermHPBAGReader(object):
         for line in input_fh:
             if "NONE" in line:
                 continue
-            yield(TranstermHPBAGEntry(line))
+            yield TranstermHPBAGEntry(line)
 
 class TranstermHPBAGEntry(object):
 

@@ -26,19 +26,20 @@ class WiggleParser(object):
                     replicon = self._replicon(row)
                     span = None
                     pos_value_pairs = []
-                    yield(WiggleEntry(
-                            track_name, prev_replicon, prev_span, prev_pos_value_pairs))
+                    yield WiggleEntry(
+                            track_name, prev_replicon, prev_span, 
+                            prev_pos_value_pairs)
                 else:
                     replicon = self._replicon(row)
             else:
                 pos_value_pairs.append([int(row[0]), float(row[1])])
-        yield(WiggleEntry(track_name, replicon, span, pos_value_pairs))
+        yield WiggleEntry(track_name, replicon, span, pos_value_pairs)
 
     def _replicon(self, row):
-        return(self._attrs_and_values(row)["chrom"])
+        return self._attrs_and_values(row)["chrom"]
 
     def _track_name(self, row):
-        return(self._attrs_and_values(row)["name"])
+        return self._attrs_and_values(row)["name"]
 
     def _attrs_and_values(self, row):
         attrs_and_values = {}
@@ -48,7 +49,7 @@ class WiggleParser(object):
             attr, value = attr_and_value.split("=")
             value = value.replace("\"", "")
             attrs_and_values[attr] = value
-        return(attrs_and_values)
+        return attrs_and_values
 
 class WiggleEntry(object):
 
@@ -77,4 +78,3 @@ class WiggleWriter(object):
 
     def close_file(self):
         self._fh.close()
-
