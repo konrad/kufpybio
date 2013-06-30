@@ -18,7 +18,7 @@ loc_antisense_str = "antisense"
 class TSSGeneMapper(object):
     """Find the associated genes for TSS (Transcription start sites).
 
-    The following type of TSS-gene constellation are discriminated:
+    The following types of TSS-gene constellation are discriminated:
 
 
         secondary   primary  internal
@@ -29,18 +29,18 @@ class TSSGeneMapper(object):
                          <---+
                          antisense
 
-    5' TSS must have the same orientation as the associated gene and
+    5' TSS must have the same orientation as the associated genes and
     must be located in a certain range upstream of the gene (see value
     of max_dist_5_prime) including the first based of the gene. This
-    means that leaderless gene will have a UTR length of 0. Internal
-    gene must have the same orientation as the associated gene and
+    means that leaderless genes will have an UTR length of 0. Internal
+    genes must have the same orientation as the associated gene and
     must be located inside of the gene. Anti-sense TSS must have the
     opposite orientation as the associated gene and must be located
     inside the gene or upstream or downstream of the gene in a certain
     range (see value of max_dist_antisense).
 
-    5' TSS are are classified in primary and secondary TSS. The TSS
-    that is in closest proximity to the gene is the primary TSS, the
+    5' TSS are classified in primary and secondary TSS. The TSS that
+    is in closest proximity to the gene is the primary TSS, the
     remaining ones are considered as secondary TSS.
 
     """
@@ -61,10 +61,10 @@ class TSSGeneMapper(object):
     def map_tss(self, tss_list, gene_list):
         """Perform the TSS to gene mapping 
 
-        Returns a list of TSS, their associated gene, and the type of TSS.
+        Returns a list of TSS, their associated genes, and the type of TSS.
 
         Arguments:
-        - tss_list: must be a list of TSS (Transcriptin start sites)
+        - tss_list: must be a list of TSS (transcriptin start sites)
           with the two features tss.pos (position as integer) and
           tss.strand ("+" or "-").
         - gene_list: must be a list of genes with the following features:
@@ -130,8 +130,8 @@ class TSSGeneMapper(object):
     def _has_5_prime_association(self, tss, gene):
         """Test for 5' prime association
 
-        Any TSS including the first nucleotide (leaderless) that is
-        5' end should return True. 
+        Any TSS including the first nucleotide (leaderless) in 5'
+        should return True.
         
         """
         if tss.strand != gene.strand:
@@ -144,8 +144,8 @@ class TSSGeneMapper(object):
     def _has_internal_association(self, tss, gene):
         """Test for internal location
 
-        Any TSS from the second to the last base. The first base is
-        5_prime_associated (leaderless TSS).
+        Any TSS from the second to the last base should return
+        True. The first base is 5_prime_associated (leaderless TSS).
 
         """
         if tss.strand != gene.strand:
@@ -178,7 +178,7 @@ class TSSGeneMapper(object):
 
         Until now each TSS-gene association was done without
         considering other genes. Here certain associations are
-        removed. If a TSS is associated to a gene that is short than
+        removed. If a TSS is associated with a gene that is short than
         self._max_dist_5_prime is can be theoretically connected to a
         gene that is located downstream of the first gene. In such a
         case the second gene association does not make sense and needs
