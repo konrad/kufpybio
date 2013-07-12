@@ -4,9 +4,9 @@ from Bio.Alphabet import DNAAlphabet
 class SubSeqExtractor(object):
     """Extract subsequences from a given DNA sequence"""
 
-    def __init__(self, fasta_seq, coordinate_start=1, include_pos=True):
+    def __init__(self, seq, coordinate_start=1, include_pos=True):
         """
-        fasta_file - path of the Fasta file
+        seq - sequence string
         coordinate_start - 0 for 0-based system; 1 for 1-based system
         include_pos - If True then the given position is given;
                       otherwise only the sequence before or after the
@@ -17,7 +17,7 @@ class SubSeqExtractor(object):
         """
         self._coordinate_start = coordinate_start
         self._include_pos = include_pos
-        self._seq = Seq.Seq(fasta_seq, DNAAlphabet())
+        self._seq = Seq.Seq(seq, DNAAlphabet())
 
     def extract(self, pos, upstream=0, downstream=0, rev_strand=False):
         """
@@ -33,23 +33,23 @@ class SubSeqExtractor(object):
         assert pos >= 0
         if self._coordinate_start == 1:
             assert pos >= 1
-        if rev_strand:
+        if rev_strand is True:
             upstream, downstream = downstream, upstream
         start = pos - upstream - 1
         end = pos + downstream
-        if not self._include_pos and downstream != 0 and upstream != 0:
+        if self._include_pos is False and downstream != 0 and upstream != 0:
             pass
-        elif not self._include_pos and downstream == 0 and upstream == 0:
+        elif self._include_pos is False and downstream == 0 and upstream == 0:
             start += 1
-        elif not self._include_pos and upstream != 0:
+        elif self._include_pos is False and upstream != 0:
             end -= 1
-        elif not self._include_pos and downstream != 0:
+        elif self._include_pos is False and downstream != 0:
             start += 1
         if self._coordinate_start == 0:
             start += 1
             end += 1
         assert start >= 0
         assert end-1 < len(self._seq)
-        if rev_strand:
+        if rev_strand is True:
             return str(self._seq[start:end].reverse_complement())
         return str(self._seq[start:end])
