@@ -39,6 +39,7 @@ class NCBIEfetch(object):
         gene_dict["uniprot_id"] = None
         gene_dict["kegg_id"] = None
         gene_dict["go_ids"] = []
+        gene_dict["locus_tag"] = tree.find(".//Gene-ref_locus-tag").text
         for db_tag in tree.findall(".//Dbtag"):
             dbtag_db = db_tag.find(".//Dbtag_db")
             object_id_str = db_tag.find(".//Object-id_str")
@@ -49,5 +50,4 @@ class NCBIEfetch(object):
                 gene_dict["kegg_id"] = object_id_str.text
             elif dbtag_db.text == "GO" and object_id_id != None:
                 gene_dict["go_ids"].append(object_id_id.text)
-
         return gene_dict
