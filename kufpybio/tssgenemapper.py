@@ -89,7 +89,9 @@ class TSSGeneMapper(object):
             for gene in gene_list:
                 self._check_tss_gene_associations(tss, gene)
             if tss not in self.tss_and_hit_genes:
-                self.tss_and_hit_genes[tss] = orphan_str
+                self.tss_and_hit_genes[tss] = {orphan_str : {
+                        'distance': None, 'location': orphan_str, 
+                        'tss_type': orphan_str}}
         self._set_type_of_5_prime_tss()
         self._remove_multiple_associations()
         return self.tss_and_hit_genes
@@ -115,11 +117,11 @@ class TSSGeneMapper(object):
             location = loc_internal_str
         elif self._has_antisense_association(tss, gene):
             location = loc_antisense_str
-        if location:
+        if not location is None:
             self.tss_and_hit_genes.setdefault(tss, {})
             self.tss_and_hit_genes[tss][gene] = {
                 "location" : location, "distance" : distance, 
-                "tss_type" : None}
+                "tss_type" : location}
             # If this is a TSS in the 5' region record the
             # distance. This will later be used to determine the type
             # of TSS.
