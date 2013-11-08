@@ -18,6 +18,8 @@ from kufpybio.igrfinder import IGRFinder
 parser = argparse.ArgumentParser(description=__description__)
 parser.add_argument("gff_file", type=argparse.FileType("r"))
 parser.add_argument("output_file", type=argparse.FileType("w"))
+parser.add_argument("--margin", type=int, default=0)
+parser.add_argument("--plus_only", default=False, action="store_true")
 args = parser.parse_args()
 # Build gene list
 gene_list = []
@@ -33,8 +35,17 @@ for entry in gff_parser.entries(args.gff_file):
 # Find IGRs and generate GFF file
 igr_finder = IGRFinder()
 args.output_file.write("##gff-version 3\n")
+
+strands = ["+", "-"]
+if args.plus_only is True:
+    strands = ["+"]
+
 for start, end in igr_finder.find_igrs(gene_list, region_entry.end):
-    for strand in ["+", "-"]:
+    start = start + args.margin
+    end = end - args.margin
+    if end <= start:
+        continue
+    for strand in strands:
         gff3_entry = Gff3Entry({
             "seq_id" : region_entry.seq_id,
             "source" : "IGR",
