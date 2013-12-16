@@ -75,7 +75,7 @@ class Mapper(object):
         self._write_header()
         for tss_pos, tss in sorted([(tss.pos, tss) 
                                     for tss in self.tss_and_genes.keys()]):
-            if self.tss_and_genes[tss] == tssgenemapper.orphan_str:
+            if tssgenemapper.orphan_str in self.tss_and_genes[tss]:
                 self._write_orphan(tss)
             else:
                 for gene_start, gene in sorted(
